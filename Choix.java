@@ -1,4 +1,5 @@
 package sudokusolver;
+import java.util.Arrays;
 import java.util.Arrays.*;
 public class Choix {
     public int[] liste;
@@ -19,6 +20,17 @@ public class Choix {
         this.liste=val_possibles;
 
         this.nb_choix=nb_choix;
+    }
+
+    public void retirer(int x){
+        for (int i = 0; i < 9; i++) {
+            if (this.liste[i]==x) {
+                this.liste[i]=-1;
+                break;
+            }
+        }
+        this.nb_choix--;
+        Arrays.sort(this.liste);
     }
     public int[] ligne(int[] grille, int x){
         int debligne = x-(x%9); //Cela nous donne le premier élément de la "ligne" du sudoku puisque ce sont des multiples de 9 (ex: 19-(19%9)=18 donc sa ligne commence à l'élément 18)

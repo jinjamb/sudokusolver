@@ -6,18 +6,7 @@ public class Grille {
     public DR1 dr1 = new DR1(grid);
     public Choix[] choix = new Choix[81];
     public Grille(){
-        this.grid = new int[] {
-            8,-1,-1, -1,-1,-1, -1,-1,-1,
-           -1,-1, 3,  6,-1,-1, -1,-1,-1,
-           -1, 7,-1, -1, 9,-1,  2,-1,-1,
-
-           -1, 5,-1, -1,-1, 7, -1,-1,-1,
-           -1,-1,-1, -1, 4, 5,  7,-1,-1,
-           -1,-1,-1,  1,-1,-1, -1, 3,-1,
-
-           -1,-1, 1, -1,-1,-1, -1, 6, 8,
-           -1,-1, 8,  5,-1,-1, -1, 1,-1,
-           -1, 9,-1, -1,-1,-1,  4,-1,-1};
+        this.grid = new int[] {-1,-1,1,-1,-1,3,9,-1,2,-1,4,-1,-1,6,7,8,-1,-1,-1,-1,-1,9,-1,8,-1,-1,7,1,-1,2,-1,-1,-1,-1,-1,-1,5,9,8,6,2,-1,7,-1,-1,7,-1,4,3,-1,-1,-1,9,1,-1,-1,7,-1,-1,9,-1,8,6,9,1,-1,8,-1,6,3,-1,4,6,-1,-1,-1,4,2,1,-1,-1};
  
         for (int i = 0; i < grid.length; i++) {
             this.choix[i] = new Choix(grid, i);
@@ -26,7 +15,17 @@ public class Grille {
 
     public void set(int val, int indice){
         this.grid[indice]=val;
-        this.choix[indice]=new Choix(this.grid, indice);
+        for (int i = indice %9; i < 81; i+=9) {
+            this.choix[i].retirer(val);
+        }
+        for (int i = Math.round(indice/9); i < 9; i++) {
+            this.choix[i].retirer(val);
+        }
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                this.choix[(Math.round(indice/27))*27+(indice%9)-(indice%3)+i*9+j].retirer(val);
+            }
+        }
     }
 
     public void afficher(){

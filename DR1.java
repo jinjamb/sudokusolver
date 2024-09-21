@@ -9,17 +9,17 @@ public class DR1 extends DeductionRule {
     public void rule(Grille sudoku){
         int i = 0;
         while (i<81) {
-            if (sudoku.choix[i].nb_choix==1) {
+            System.out.print(i+" ");
+            if (sudoku.choix[i].nb_choix==1 && sudoku.grid[i]==-1 ) {
                 sudoku.set(sudoku.choix[i].liste[8], i);
-                sudoku.afficher();
+                System.out.println(Math.round(i/9)+" "+i%9);
                 i=0;
                 continue;
             }
-            
-            System.out.print(i);
-            printarray(sudoku.choix[i].liste);
             i++;
         }
+        sudoku.afficher();
+        printarray(sudoku.choix[10].liste);
         System.out.println("impossible pour la dr1");
     }
 }
