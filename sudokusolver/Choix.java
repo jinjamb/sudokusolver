@@ -1,6 +1,5 @@
 package sudokusolver;
 import java.util.Arrays;
-import java.util.Arrays.*;
 public class Choix {
     public int[] liste;
     public int nb_choix=0;
@@ -23,13 +22,13 @@ public class Choix {
     }
 
     public void retirer(int x){
-        for (int i = 0; i < 9; i++) {
+        for (int i = 8; i >= 0; i--) {
             if (this.liste[i]==x) {
                 this.liste[i]=-1;
+                this.nb_choix--;
                 break;
             }
         }
-        this.nb_choix--;
         Arrays.sort(this.liste);
     }
     public int[] ligne(int[] grille, int x){
