@@ -15,7 +15,6 @@ public class Choix {
         for (int i = 0; i < val_possibles.length; i++) {
             if (val_possibles[i]!=-1){nb_choix++;}
         }
-        java.util.Arrays.sort(val_possibles);
         this.liste=val_possibles;
 
         this.nb_choix=nb_choix;
@@ -29,7 +28,6 @@ public class Choix {
                 break;
             }
         }
-        Arrays.sort(this.liste);
     }
     public int[] ligne(int[] grille, int x){
         int debligne = x-(x%9); //Cela nous donne le premier élément de la "ligne" du sudoku puisque ce sont des multiples de 9 (ex: 19-(19%9)=18 donc sa ligne commence à l'élément 18)
@@ -72,9 +70,7 @@ public class Choix {
         
         int[] resultat= A;
         for (int index = 0; index < A.length; index++) {
-            if (B[index]==-1) {
-                resultat[index]=B[index];
-            }
+            if (B[index]==-1) { resultat[index]=B[index]; }
         }
         return resultat;
     }
