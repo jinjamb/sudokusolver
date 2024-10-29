@@ -10,6 +10,7 @@ public class Parser {
             if (val==0 || val>9) {System.out.println("Valeur incorrecte, veuillez entrer une valeur entre 1 et 9"); i--;}
             else {Grille.grid[i]=val;}
         }
+        sc.close();
         return Grille.grid;
     }
 }

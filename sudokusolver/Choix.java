@@ -1,5 +1,4 @@
 package sudokusolver;
-import java.util.Arrays;
 public class Choix {
     public int[] liste;
     public int nb_choix=0;
@@ -16,7 +15,6 @@ public class Choix {
             if (val_possibles[i]!=-1){nb_choix++;}
         }
         this.liste=val_possibles;
-
         this.nb_choix=nb_choix;
     }
 
