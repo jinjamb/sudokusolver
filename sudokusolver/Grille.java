@@ -5,7 +5,9 @@ import java.io.FileNotFoundException;
 public class Grille {
     public static int[] grid = new int[81];
     public DR1 dr1 = new DR1();
+    public DR2 dr2 = new DR2();
     public Choix[] choix = new Choix[81];
+
     public Grille() throws FileNotFoundException { // initialisation de la grille des remplissage des tableaux de choix
         this.grid = Parser.parser("./sudokusolver/test.txt");
         for (int i = 0; i < grid.length; i++) {
