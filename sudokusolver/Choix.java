@@ -5,23 +5,24 @@ public class Choix {
     public DeductionRule dr = new DeductionRule();
 
     Choix(int[] grille, int x){ 
-        int[] val_possibles = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
-        if (x!=-1) {
+        this.liste=new int[]{0,0,0,0,0,0,0,0,0};
+        if ( grille[x]==-1 ) {
             int[] ligne= this.ligne(grille, x), col= this.colomne(grille, x), cube = this.cube(grille, x);
-            val_possibles = this.fusion(this.fusion(col, ligne), cube);
+            this.liste = this.fusion(this.fusion(col, ligne), cube);
         }
+
         int nb_choix=0;
-        for (int i = 0; i < val_possibles.length; i++) {
-            if (val_possibles[i]!=-1){nb_choix++;}
+        for (int i = 0; i < 9; i++) {
+            if (this.liste[i]!=0){nb_choix++;}
         }
-        this.liste=val_possibles;
         this.nb_choix=nb_choix;
     }
 
-    public void retirer(int x){
+    public void retirer(int x){ 
+        System.out.println("je retire "+x);
         for (int i = 8; i >= 0; i--) {
             if (this.liste[i]==x) {
-                this.liste[i]=-1;
+                this.liste[i]=0;
                 this.nb_choix--;
                 break;
             }
@@ -57,7 +58,7 @@ public class Choix {
             for (int i = 1; i <= 9; i++) {
                 for (int j = 0; j < 9; j++) {
                     if (tab[j]==i) {
-                        res[i-1]=-1;
+                        res[i-1]=0;
                     }
                 }
             }
@@ -68,7 +69,7 @@ public class Choix {
         
         int[] resultat= A;
         for (int index = 0; index < A.length; index++) {
-            if (B[index]==-1) { resultat[index]=B[index]; }
+            if (B[index]==0) { resultat[index]=B[index]; }
         }
         return resultat;
     }

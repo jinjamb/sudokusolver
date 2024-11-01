@@ -1,15 +1,26 @@
 package sudokusolver;
-import java.util.Arrays;
 
 public class Grille {
     public static int[] grid = new int[81];
     public DR1 dr1 = new DR1();
+    public DR3 dr3 = new DR3();
     public Choix[] choix = new Choix[81];
     public Grille(){ // initialisation de la grille des remplissage des tableaux de choix
         Grille.grid = Parser.parser();
         for (int i = 0; i < grid.length; i++) {
             this.choix[i] = new Choix(grid, i);
+            if (Grille.grid[i]!=-1) {
+                this.choix[i].liste=new int[]{0,0,0,0,0,0,0,0,0};
+                this.choix[i].nb_choix=0;}
+        
         }
+        dr1.printarray(this.choix[37].liste);
+        dr1.printarray(this.choix[39].liste);
+        dr1.printarray(this.choix[33].liste);
+        dr1.printarray(this.choix[34].liste);
+        dr1.printarray(this.choix[42].liste);
+        dr1.printarray(this.choix[44].liste);
+
     }
 
     public void set(int val, int indice){
@@ -19,11 +30,17 @@ public class Grille {
         for (int i : dr1.cube(indice)) { this.choix[i].retirer(val);}
 
     }
-public void retirer_choix(int indice, int[] choix){ // sauf est la liste des indices à éviter
-    for (int i = 0; i < choix.length; i++) {
-        this.choix[indice].liste[choix[i]]=-1;
+    public void retirer_choix(int indice, int[] choix){
+        if (indice!=-1) {
+            for (int i = 0; i < choix.length; i++) {
+                if (choix[i]>0) {
+                    if (this.choix[indice].liste[i] > 0 ) {
+                        this.choix[indice].liste[choix[i]-1]=0;                   
+                    } 
+                }
+            }
+        }
     }
-}
 
     public void afficher(){
         for (int index = 0; index < 81; index++) {
