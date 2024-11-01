@@ -1,12 +1,16 @@
 package sudokusolver;
 
+import java.io.FileNotFoundException;
+
 public class Grille {
     public static int[] grid = new int[81];
     public DR1 dr1 = new DR1();
+    public DR2 dr2 = new DR2();
     public DR3 dr3 = new DR3();
     public Choix[] choix = new Choix[81];
-    public Grille(){ // initialisation de la grille des remplissage des tableaux de choix
-        Grille.grid = Parser.parser();
+
+    public Grille() throws FileNotFoundException { // initialisation de la grille des remplissage des tableaux de choix
+        Grille.grid = Parser.parser("./sudokusolver/test.txt");
         for (int i = 0; i < grid.length; i++) {
             this.choix[i] = new Choix(grid, i);
             if (Grille.grid[i]!=-1) {
