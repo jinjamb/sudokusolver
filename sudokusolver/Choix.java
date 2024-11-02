@@ -19,7 +19,7 @@ public class Choix {
     }
 
     public void retirer(int x){ 
-        System.out.println("je retire "+x);
+        //System.out.println("je retire "+x);
         for (int i = 8; i >= 0; i--) {
             if (this.liste[i]==x) {
                 this.liste[i]=0;

@@ -15,16 +15,16 @@ public class DeductionRule {
         }
         System.out.print("]\n");
     }
-    public void printarray(int[][] A){
+    /*public void printarray(int[][] A){
         for (int i = 0; i < A.length; i++) {
             printarray(A[i]);
         }
-    }
+    }*/
     public int[] colomne(int x){
         int debcol = x%9; //Cela nous donne le premier élément de la "colomne" du sudoku puisque ce sont des multiples de 9 (ex: 19%9=1 donc sa colomne commence à l'élément 1)
         int[] col = new int[9];
         for (int i = 0; i < 9; i++) { col[i]= i*9+debcol; }
-        printarray(col);
+        //printarray(col);
         return col;
     }
     public int[] ligne(int x){

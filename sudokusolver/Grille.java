@@ -18,12 +18,12 @@ public class Grille {
                 this.choix[i].nb_choix=0;}
         
         }
-        dr1.printarray(this.choix[37].liste);
+        /*dr1.printarray(this.choix[37].liste);
         dr1.printarray(this.choix[39].liste);
         dr1.printarray(this.choix[33].liste);
         dr1.printarray(this.choix[34].liste);
         dr1.printarray(this.choix[42].liste);
-        dr1.printarray(this.choix[44].liste);
+        dr1.printarray(this.choix[44].liste);*/
 
     }
 
@@ -31,7 +31,7 @@ public class Grille {
         Grille.grid[indice]=val;
         for (int i : dr1.ligne(indice)) { this.choix[i].retirer(val); }
         for (int i : dr1.colomne(indice)) { this.choix[i].retirer(val); }
-        for (int i : dr1.cube(indice)) { this.choix[i].retirer(val);}
+        //for (int i : dr1.cube(indice)) { this.choix[i].retirer(val);}
 
     }
     public void retirer_choix(int indice, int[] choix){
