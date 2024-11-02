@@ -8,7 +8,7 @@ public class DR2 extends DeductionRule{
 
     public void rule(Grille sudoku) {
         for (int i = 0; i < 81; i++) {
-            if (sudoku.grid[i] == -1){
+            if (Grille.grid[i] == -1){
                 for (int numToPlace = 1; numToPlace <= 9; numToPlace++){
                     int counter = isPresent(sudoku, i, numToPlace);
                     if (counter == 1){
@@ -28,7 +28,7 @@ public class DR2 extends DeductionRule{
         int counter = 0;
 
         for (int ind = 0; ind < 9; ind++){
-            if (sudoku.grid[rowStart + ind] == numToPlace || sudoku.grid[9 * ind + colStart] == numToPlace || sudoku.grid[boxStart + ind % 3 + 9 * (ind / 3)] == numToPlace){
+            if (Grille.grid[rowStart + ind] == numToPlace || Grille.grid[9 * ind + colStart] == numToPlace || Grille.grid[boxStart + ind % 3 + 9 * (ind / 3)] == numToPlace){
                 counter++;
             }
         }

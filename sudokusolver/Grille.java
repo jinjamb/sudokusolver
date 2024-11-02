@@ -10,28 +10,18 @@ public class Grille {
     public Choix[] choix = new Choix[81];
 
     public Grille() throws FileNotFoundException { // initialisation de la grille des remplissage des tableaux de choix
-        Grille.grid = Parser.parser("./sudokusolver/test.txt");
+        Grille.grid = Parser.parser("./sudokusolver/test0.txt");
         for (int i = 0; i < grid.length; i++) {
-            this.choix[i] = new Choix(grid, i);
-            if (Grille.grid[i]!=-1) {
-                this.choix[i].liste=new int[]{0,0,0,0,0,0,0,0,0};
-                this.choix[i].nb_choix=0;}
-        
+            this.choix[i] = new Choix(grid, i); 
+            dr1.printarray(dr1.cube(i));       
         }
-        dr1.printarray(this.choix[37].liste);
-        dr1.printarray(this.choix[39].liste);
-        dr1.printarray(this.choix[33].liste);
-        dr1.printarray(this.choix[34].liste);
-        dr1.printarray(this.choix[42].liste);
-        dr1.printarray(this.choix[44].liste);
-
     }
 
     public void set(int val, int indice){
         Grille.grid[indice]=val;
         for (int i : dr1.ligne(indice)) { this.choix[i].retirer(val); }
         for (int i : dr1.colomne(indice)) { this.choix[i].retirer(val); }
-        for (int i : dr1.cube(indice)) { this.choix[i].retirer(val);}
+        for (int i : dr1.cube(indice)) { System.out.println(indice+" "+i);this.choix[i].retirer(val);}
 
     }
     public void retirer_choix(int indice, int[] choix){
