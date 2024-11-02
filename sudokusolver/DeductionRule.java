@@ -33,8 +33,7 @@ public class DeductionRule {
         return ligne;
     }
     public int[] cube(int x){
-        int debcube = (Math.round(x/27))*27+(x%9)-(x%3);
-        System.out.print(debcube+" ");   // Cela nous donne le premier élément du carré contenant notre élément du sudoku puisque ce sont des multiples de 3 sur une ligne d'un multiple de 27 (ex: (19%27)+(18%9)%3 donc son cube commence à l'élément 0)
+        int debcube = (Math.round(x/27))*27+(x%9)-(x%3);   // Cela nous donne le premier élément du carré contenant notre élément du sudoku puisque ce sont des multiples de 3 sur une ligne d'un multiple de 27 (ex: (19%27)+(18%9)%3 donc son cube commence à l'élément 0)
         int[] cube = new int[9];        // (x%9) retiens le décalage horizontal de x et -x%3 l'aligne sur le coin le plus proche puisque le coin est multiple de 3
         for (int i = 0; i < 3; i++) { for (int j = 0; j < 3; j++) {
             cube[i*3+j] = debcube+j+i*9; }}
