@@ -12,7 +12,6 @@ public class DR3 extends DeductionRule {
         return false; 
     }
     public void parcours(int[] zone, Grille sudoku){
-        printarray(zone);
         int compteur; int[] sauf=zone;
         for (int i : zone) {
             if (Grille.grid[i]>0){continue;}

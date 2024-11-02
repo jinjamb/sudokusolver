@@ -110,8 +110,13 @@ public class DR2 extends DeductionRule{
         int counter = 0;
 
         for (int ind = 0; ind < 9; ind++){
+<<<<<<< HEAD
             if (sudoku.grid[rowStart + ind] == numToPlace || sudoku.grid[9 * ind + colStart] == numToPlace || sudoku.grid[boxStart + ind % 3 + 9 * (ind / 3)] == numToPlace){
                 return true;
+=======
+            if (Grille.grid[rowStart + ind] == numToPlace || Grille.grid[9 * ind + colStart] == numToPlace || Grille.grid[boxStart + ind % 3 + 9 * (ind / 3)] == numToPlace){
+                counter++;
+>>>>>>> ec7d76babd801cc03d0844ba63d3158f5e93fd52
             }
         }
         return false;

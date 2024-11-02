@@ -6,14 +6,14 @@ public class Choix {
 
     Choix(int[] grille, int x){ 
         this.liste=new int[]{0,0,0,0,0,0,0,0,0};
-        if ( grille[x]==-1 ) {
+        if ( grille[x]<1 ) {
             int[] ligne= this.ligne(grille, x), col= this.colomne(grille, x), cube = this.cube(grille, x);
             this.liste = this.fusion(this.fusion(col, ligne), cube);
         }
 
         int nb_choix=0;
         for (int i = 0; i < 9; i++) {
-            if (this.liste[i]!=0){nb_choix++;}
+            if (this.liste[i]>0){nb_choix++;}
         }
         this.nb_choix=nb_choix;
     }
@@ -69,7 +69,7 @@ public class Choix {
         
         int[] resultat= A;
         for (int index = 0; index < A.length; index++) {
-            if (B[index]==0) { resultat[index]=B[index]; }
+            if (B[index]<1) { resultat[index]=B[index]; }
         }
         return resultat;
     }
