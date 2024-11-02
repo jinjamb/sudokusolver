@@ -6,20 +6,20 @@ public class DeductionRule {
     public void rule(int[] grille){}
    
     public void printarray(int[] A){ // a bouger dans une toolbox
-    System.out.print("[");
-    for (int i = 0; i < A.length; i++) {
-        if (A[i]==-1) {System.out.print("_");}
-        if (A[i]==0){System.out.print(" ");}
-        else if (A[i]!=-1) {System.out.print(A[i]);}
-        if (i< A.length-1){System.out.print(", ");}
-        }
-        System.out.print("]\n");
+        System.out.print("[");
+        for (int i = 0; i < A.length; i++) {
+            if (A[i]==-1) {System.out.print("_");}
+            if (A[i]==0){System.out.print(" ");}
+            else if (A[i]!=-1) {System.out.print(A[i]);}
+            if (i< A.length-1){System.out.print(", ");}
+            }
+            System.out.print("]\n");
     }
-    public void printarray(int[][] A){
+    /*public void printarray(int[][] A){
         for (int i = 0; i < A.length; i++) {
             printarray(A[i]);
         }
-    }
+    }*/
     public int[] colomne(int x){
         int debcol = x%9; //Cela nous donne le premier élément de la "colomne" du sudoku puisque ce sont des multiples de 9 (ex: 19%9=1 donc sa colomne commence à l'élément 1)
         int[] col = new int[9];
