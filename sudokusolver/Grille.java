@@ -21,7 +21,7 @@ public class Grille {
         Grille.grid[indice]=val;
         for (int i : dr1.ligne(indice)) { this.choix[i].retirer(val); }
         for (int i : dr1.colomne(indice)) { this.choix[i].retirer(val); }
-        for (int i : dr1.cube(indice)) { System.out.println(indice+" "+i);this.choix[i].retirer(val);}
+        //for (int i : dr1.cube(indice)) { System.out.println(indice+" "+i);this.choix[i].retirer(val);}
     }
     public void retirer_choix(int indice, int[] choix){
         if (indice!=-1) {

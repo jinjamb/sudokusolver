@@ -24,15 +24,16 @@ public class DR2 extends DeductionRule{
                 }
             }
         }
+        printarray(sudoku.choix[62].liste);
         sudoku.afficher();
     }
 
-    public int findUniqueInRow(Grille sudoku, int row, int num){
-        int debligne = row - (row % 9);
+    private int findUniqueInRow(Grille sudoku, int index, int num) {
+        int stRow = index - (index % 9);
         int count = 0;
         int uniqueIndex = -1;
 
-        for (int i = debligne; i < debligne + 9; i++) {
+        for (int i = stRow; i < stRow + 9; i++) {
             if (sudoku.grid[i] == -1 && canPlaceNumber(sudoku, i, num)) {
                 count++;
                 uniqueIndex = i;
@@ -40,13 +41,13 @@ public class DR2 extends DeductionRule{
         }
         return count == 1 ? uniqueIndex : -1;
     }
-    
-    public int findUniqueInCol(Grille sudoku, int col, int num){
-        int debcol = col % 9;
+
+    private int findUniqueInCol(Grille sudoku, int index, int num) {
+        int stCol = index % 9;
         int count = 0;
         int uniqueIndex = -1;
 
-        for (int i = debcol; i < 81; i += 9) {
+        for (int i = stCol; i < 81; i += 9) {
             if (sudoku.grid[i] == -1 && canPlaceNumber(sudoku, i, num)) {
                 count++;
                 uniqueIndex = i;
@@ -54,15 +55,15 @@ public class DR2 extends DeductionRule{
         }
         return count == 1 ? uniqueIndex : -1;
     }
-    
-    public int findUniqueInBox(Grille sudoku, int box, int num){
-        int debcube = (box / 27) * 27 + (box % 9) - (box % 3);
+
+    private int findUniqueInBox(Grille sudoku, int index, int num) {
+        int stBox = (index / 27) * 27 + (index % 9) - (index % 3);
         int count = 0;
         int uniqueIndex = -1;
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                int currentIndex = debcube + j + i * 9;
+                int currentIndex = stBox + j + i * 9;
                 if (sudoku.grid[currentIndex] == -1 && canPlaceNumber(sudoku, currentIndex, num)) {
                     count++;
                     uniqueIndex = currentIndex;
@@ -72,53 +73,39 @@ public class DR2 extends DeductionRule{
         return count == 1 ? uniqueIndex : -1;
     }
 
-    public boolean canPlaceNumber(Grille sudoku, int index, int num){return !isInRow(sudoku, index, num) && !isInCol(sudoku, index, num) && !isInBox(sudoku, index, num);}
+    private boolean canPlaceNumber(Grille sudoku, int index, int num) {
+        return !isInRow(sudoku, index, num) && !isInCol(sudoku, index, num) && !isInBox(sudoku, index, num);
+    }
 
-    public boolean isInRow(Grille sudoku, int index, int num){
-        int rowStart = 9 - (index % 9);
-        for (int i = 0; i < 9; i++){
-            if (sudoku.grid[rowStart + i] == num){
+    private boolean isInRow(Grille sudoku, int index, int num) {
+        int stRow = index - (index % 9);
+        for (int i = stRow; i < stRow + 9; i++) {
+            if (sudoku.grid[i] == num) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean isInCol(Grille sudoku, int index, int num){
-        int colStart = index % 9;
-        for (int i = 0; i < 9; i++){
-            if (sudoku.grid[9 * i + colStart] == num){
+    private boolean isInCol(Grille sudoku, int index, int num) {
+        int stCol = index % 9;
+        for (int i = stCol; i < 81; i += 9) {
+            if (sudoku.grid[i] == num) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean isInBox(Grille sudoku, int index, int num){
-        int boxStart = (index / 27) * 27 + (index % 9) - (index % 3);
-        for (int i = 0; i < 9; i++){
-            if (sudoku.grid[boxStart + i % 3 + 9 * (i / 3)] == num){
-                return true;
+    private boolean isInBox(Grille sudoku, int index, int num) {
+        int stBox = (index / 27) * 27 + (index % 9) - (index % 3);
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (sudoku.grid[stBox + j + i * 9] == num) {
+                    return true;
+                }
             }
         }
         return false;
     }
-    /* public boolean isPresent(Grille sudoku, int index, int numToPlace){
-        int rowStart = 9-(index % 9);
-        int colStart = index % 9;
-        int boxStart = (index / 27) * 27 + (index % 9) - (index % 3);
-        int counter = 0;
-
-        for (int ind = 0; ind < 9; ind++){
-<<<<<<< HEAD
-            if (sudoku.grid[rowStart + ind] == numToPlace || sudoku.grid[9 * ind + colStart] == numToPlace || sudoku.grid[boxStart + ind % 3 + 9 * (ind / 3)] == numToPlace){
-                return true;
-=======
-            if (Grille.grid[rowStart + ind] == numToPlace || Grille.grid[9 * ind + colStart] == numToPlace || Grille.grid[boxStart + ind % 3 + 9 * (ind / 3)] == numToPlace){
-                counter++;
->>>>>>> ec7d76babd801cc03d0844ba63d3158f5e93fd52
-            }
-        }
-        return false;
-    } */
 }
