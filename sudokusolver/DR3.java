@@ -36,7 +36,7 @@ public class DR3 extends DeductionRule {
         for (int i = 0; i < 9; i++) {
             parcours(ligne(i*9), sudoku);
             parcours(colomne(i), sudoku);
-            parcours(cube(i), sudoku);
+            parcours(cube((i*3/9)*27+(i*3)), sudoku);
         }
     }
 }
