@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        Grille sudoku = new Grille();
+        Grille sudoku = new Grille("./sudokusolver/test2.txt");
         sudoku.afficher();
         sudoku.dr1.rule(sudoku);
         sudoku.dr2.rule(sudoku);
