@@ -9,12 +9,13 @@ public class Grille {
     public DR3 dr3 = new DR3();
     public Choix[] choix = new Choix[81];
 
-    public Grille() throws FileNotFoundException { // initialisation de la grille des remplissage des tableaux de choix
-        Grille.grid = Parser.parser("./sudokusolver/test2.txt");
+    public Grille(String filePath) throws FileNotFoundException { // initialisation de la grille des remplissage des tableaux de choix
+        Grille.grid = Parser.parser(filePath);
         for (int i = 0; i < grid.length; i++) {
             this.choix[i] = new Choix(grid, i); 
         }
     }
+
 
     public void set(int val, int indice){
         Grille.grid[indice]=val;

@@ -9,19 +9,25 @@ public class DR3 extends DeductionRule {
         for (int[] sousens : choix) {
             if (Arrays.equals(sousens, candidat.liste)) { return true; }
         }
-        return false; 
+        return false;
     }
-    public void parcours(int[] zone, Grille sudoku){
+
+    public int nblibre(int[] zone, Grille sudoku){
+        int compteur=0;
+        for (int i : zone) { if (Grille.grid[i]<1){ compteur++; }}
+        return compteur;
+    }
+
+    public int parcours(int[] zone, Grille sudoku){
         int compteur; int[] sauf=zone;
         for (int i : zone) {
-            if (Grille.grid[i]>0){continue;}
+            if (Grille.grid[i]>0 || nblibre(zone,sudoku)==sudoku.choix[i].nb_choix) { continue; } // si le nombre de cases vaut le nombre de choix de i ou que i est déja rempli, on n'a rien a appliquer pour i.
             compteur=0; sauf=Arrays.copyOf(zone, 9);
             for (int j = 0; j < zone.length; j++) {
                 if (sudoku.choix[zone[j]].nb_choix <= sudoku.choix[i].nb_choix){
                     if (i==zone[j] || Grille.grid[zone[j]]>0) { sauf[j]=-1; continue;}
                     if ( inclus(sudoku.choix[i], sudoku.choix[zone[j]])) {
-                        sauf[j]=-1;
-                        compteur++; }
+                        sauf[j]=-1; compteur++; }
                 }
             }
             if (compteur+1==sudoku.choix[i].nb_choix && compteur>0) { // si on a assez d'éléments inclus dans A on peut les retirer des autres choix
@@ -30,6 +36,8 @@ public class DR3 extends DeductionRule {
                 }
             }
         }
+        if (full(sauf)){return 3;}
+        return 0;
     }
     
     public void rule(Grille sudoku){

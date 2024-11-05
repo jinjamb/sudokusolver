@@ -6,10 +6,10 @@ public class DR2 extends DeductionRule{
         super();
     }
 
-    public void rule(Grille sudoku) {
+    public int rule(Grille sudoku) {
         for (int num = 1; num <= 9; num++) {
-            for (int i = 0; i < 81; i++) {
-                if (sudoku.grid[i] == -1) {
+              for (int i = 0; i < 81; i++) {
+                if (Grille.grid[i] == -1) {
                     int rowIndex = findUniqueInRow(sudoku, i, num);
                     int colIndex = findUniqueInCol(sudoku, i, num);
                     int subgridIndex = findUniqueInBox(sudoku, i, num);
@@ -21,11 +21,13 @@ public class DR2 extends DeductionRule{
                     } else if (subgridIndex != -1) {
                         sudoku.set(num, subgridIndex);
                     }
+                    if (full(Grille.grid)) {return 2;}
                 }
             }
+            
         }
-        printarray(sudoku.choix[62].liste);
         sudoku.afficher();
+        return 0;
     }
 
     private int findUniqueInRow(Grille sudoku, int index, int num) {

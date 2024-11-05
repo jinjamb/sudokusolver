@@ -1,6 +1,6 @@
 package sudokusolver;
 
-public class DeductionRule {
+public abstract class DeductionRule {
 
     public DeductionRule(){}
     public void rule(int[] grille){}
@@ -15,11 +15,14 @@ public class DeductionRule {
             }
             System.out.print("]\n");
     }
-    /*public void printarray(int[][] A){
-        for (int i = 0; i < A.length; i++) {
-            printarray(A[i]);
+    
+    public boolean full(int[] Grille){
+        for (int i : Grille) {
+            if (i<1){return false;}
         }
-    }*/
+        return true;
+    }
+
     public int[] colomne(int x){
         int debcol = x%9; //Cela nous donne le premier élément de la "colomne" du sudoku puisque ce sont des multiples de 9 (ex: 19%9=1 donc sa colomne commence à l'élément 1)
         int[] col = new int[9];
