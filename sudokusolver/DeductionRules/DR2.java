@@ -1,4 +1,6 @@
-package sudokusolver;
+package sudokusolver.DeductionRules;
+
+import sudokusolver.Solver.Grille;
 
 public class DR2 extends DeductionRule{
 

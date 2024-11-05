@@ -1,4 +1,8 @@
-package sudokusolver;
+package sudokusolver.Solver;
+
+import sudokusolver.DeductionRules.DR1;
+import sudokusolver.DeductionRules.DR2;
+import sudokusolver.DeductionRules.DR3;
 
 import java.io.FileNotFoundException;
 
@@ -10,7 +14,7 @@ public class Grille {
     public Choix[] choix = new Choix[81];
 
     public Grille() throws FileNotFoundException { // initialisation de la grille des remplissage des tableaux de choix
-        Grille.grid = Parser.parser("./sudokusolver/test2.txt");
+        Grille.grid = Parser.parser("sudokusolver/GridFiles/test2.txt");
         for (int i = 0; i < grid.length; i++) {
             this.choix[i] = new Choix(grid, i); 
         }

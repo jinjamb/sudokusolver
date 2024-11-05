@@ -1,4 +1,7 @@
-package sudokusolver;
+package sudokusolver.DeductionRules;
+import sudokusolver.Solver.Choix;
+import sudokusolver.Solver.Grille;
+
 import java.util.Arrays;
 
 public class DR3 extends DeductionRule {

@@ -1,4 +1,4 @@
-import sudokusolver.*;
+import sudokusolver.Solver.Grille;
 
 import java.io.FileNotFoundException;
 
@@ -9,6 +9,5 @@ public class Main {
         sudoku.dr1.rule(sudoku);
         sudoku.dr2.rule(sudoku);
         sudoku.dr3.rule(sudoku);
-        sudoku.dr3.printarray(sudoku.choix[44].liste);
     }
 }

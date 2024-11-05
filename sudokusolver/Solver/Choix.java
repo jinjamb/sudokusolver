@@ -1,4 +1,7 @@
-package sudokusolver;
+package sudokusolver.Solver;
+
+import sudokusolver.DeductionRules.DeductionRule;
+
 public class Choix {
     public int[] liste;
     public int nb_choix=0;

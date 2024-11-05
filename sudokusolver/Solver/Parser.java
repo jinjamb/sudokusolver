@@ -1,4 +1,4 @@
-package sudokusolver;
+package sudokusolver.Solver;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
