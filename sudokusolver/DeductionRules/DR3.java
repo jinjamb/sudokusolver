@@ -1,6 +1,6 @@
 package sudokusolver.DeductionRules;
 import sudokusolver.Solver.Choix;
-import sudokusolver.Solver.Grille;
+import sudokusolver.Solver.GridSingleton;
 
 import java.util.Arrays;
 
@@ -14,14 +14,14 @@ public class DR3 extends DeductionRule {
         }
         return false; 
     }
-    public void parcours(int[] zone, Grille sudoku){
+    public void parcours(int[] zone, GridSingleton sudoku){
         int compteur; int[] sauf=zone;
         for (int i : zone) {
-            if (Grille.grid[i]>0){continue;}
+            if (GridSingleton.grid[i]>0){continue;}
             compteur=0; sauf=Arrays.copyOf(zone, 9);
             for (int j = 0; j < zone.length; j++) {
                 if (sudoku.choix[zone[j]].nb_choix <= sudoku.choix[i].nb_choix){
-                    if (i==zone[j] || Grille.grid[zone[j]]>0) { sauf[j]=-1; continue;}
+                    if (i==zone[j] || GridSingleton.grid[zone[j]]>0) { sauf[j]=-1; continue;}
                     if ( inclus(sudoku.choix[i], sudoku.choix[zone[j]])) {
                         sauf[j]=-1;
                         compteur++; }
@@ -35,7 +35,7 @@ public class DR3 extends DeductionRule {
         }
     }
     
-    public void rule(Grille sudoku){
+    public void rule(GridSingleton sudoku){
         for (int i = 0; i < 9; i++) {
             parcours(ligne(i*9), sudoku);
             parcours(colomne(i), sudoku);
