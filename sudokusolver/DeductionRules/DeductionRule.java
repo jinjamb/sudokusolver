@@ -1,4 +1,4 @@
-package sudokusolver;
+package sudokusolver.DeductionRules;
 
 public abstract class DeductionRule {
 
