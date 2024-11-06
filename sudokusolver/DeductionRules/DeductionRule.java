@@ -1,9 +1,11 @@
 package sudokusolver.DeductionRules;
 
+import sudokusolver.Solver.GridSingleton;
+
 public abstract class DeductionRule {
 
     public DeductionRule(){}
-    public void rule(int[] grille){}
+    public void rule(GridSingleton grille){}
    
     public void printarray(int[] A){ // a bouger dans une toolbox
         System.out.print("[");
