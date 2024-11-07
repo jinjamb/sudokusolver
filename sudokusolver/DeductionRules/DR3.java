@@ -4,7 +4,7 @@ import sudokusolver.Solver.GridSingleton;
 
 import java.util.Arrays;
 
-public class DR3 extends DeductionRule {
+public class DR3 extends DeductionRule implements DeductionRuleStrategy {
     public DR3(){super();}
     
     public boolean inclus(Choix A, Choix candidat){ // on check si candidat est un sousensemble de A
@@ -49,6 +49,7 @@ public class DR3 extends DeductionRule {
             parcours(colomne(i), sudoku);
             parcours(cube((i*3/9)*27+(i*3)), sudoku);
         }
+        if (full(GridSingleton.grid)) { return 3; }
         return 0;
     }
 }

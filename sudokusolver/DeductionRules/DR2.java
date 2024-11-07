@@ -2,7 +2,7 @@ package sudokusolver.DeductionRules;
 
 import sudokusolver.Solver.GridSingleton;
 
-public class DR2 extends DeductionRule{
+public class DR2 extends DeductionRule implements DeductionRuleStrategy{
 
     public DR2() {
         super();
@@ -27,7 +27,6 @@ public class DR2 extends DeductionRule{
                 }
             }
         }
-        sudoku.afficher();
         return 0;
     }
 
@@ -110,5 +109,12 @@ public class DR2 extends DeductionRule{
             }
         }
         return false;
+    }
+
+    public boolean full(int[] Grille){
+        for (int i : Grille) {
+            if (i<1){return false;}
+        }
+        return true;
     }
 }

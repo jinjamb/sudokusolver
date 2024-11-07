@@ -2,7 +2,7 @@ package sudokusolver.DeductionRules;
 
 import sudokusolver.Solver.GridSingleton;
 
-public class DR1 extends DeductionRule {
+public class DR1 extends DeductionRule implements DeductionRuleStrategy  {
     public DR1() {
         super();
     }

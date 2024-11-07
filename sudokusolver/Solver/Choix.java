@@ -1,12 +1,11 @@
 package sudokusolver.Solver;
 
-import sudokusolver.DeductionRules.DR1;
-import sudokusolver.DeductionRules.DeductionRule;
+import sudokusolver.DeductionRules.*;
 
 public class Choix {
     public int[] liste;
     public int nb_choix=0;
-    public DR1 dominiquerepublicaine= new DR1();
+
     Choix(int[] grille, int x){ 
         this.liste=new int[]{0,0,0,0,0,0,0,0,0};
         if ( grille[x]<1 ) {
@@ -46,16 +45,13 @@ public class Choix {
     }
 
     public int[] cube(int[] grille, int x){
-        int debcube = (x/27)*27+(x%9)-(x%3);// Cela nous donne le premier élément du carré contenant notre élément du sudoku puisque ce sont des multiples de 3 sur une ligne d'un multiple de 27 (ex: (19%27)+(18%9)%3 donc son cube commence à l'élément 0)
-        int[] cube = new int[9];            // (x%9) retiens le décalage horizontal de x et -x%3 l'aligne sur le coin le plus proche puisque le coin est multiple de 3
-        System.out.print(x+"_"+debcube+" : ");
+        int debcube = (x/27)*27+(x%9)-(x%3);   // Cela nous donne le premier élément du carré contenant notre élément du sudoku puisque ce sont des multiples de 3 sur une ligne d'un multiple de 27 (ex: (19%27)+(18%9)%3 donc son cube commence à l'élément 0)
+        int[] cube = new int[9];        // (x%9) retiens le décalage horizontal de x et -x%3 l'aligne sur le coin le plus proche puisque le coin est multiple de 3
         for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {System.out.print((debcube+j+i*9)+" ");
+            for (int j = 0; j < 3; j++) {
                 cube[i*3+j] = grille[debcube+j+i*9];
             }
         }
-
-        this.dominiquerepublicaine.printarray(cube);
         return tri(cube);
     }
 
