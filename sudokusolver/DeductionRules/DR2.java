@@ -2,13 +2,13 @@ package sudokusolver.DeductionRules;
 
 import sudokusolver.Solver.GridSingleton;
 
-public class DR2 extends DeductionRule{
+public class DR2 extends DeductionRule implements DeductionRuleStrategy{
 
     public DR2() {
         super();
     }
 
-    public int rule(Grille sudoku) {
+    public int rule(GridSingleton sudoku) {
         for (int num = 1; num <= 9; num++) {
             for (int i = 0; i < 81; i++) {
                 if (GridSingleton.grid[i] == -1) {
@@ -23,11 +23,10 @@ public class DR2 extends DeductionRule{
                     } else if (subgridIndex != -1) {
                         sudoku.set(num, subgridIndex);
                     }
-                    if (full(Grille.grid)) {return 2;}
+                    if (full(GridSingleton.grid)) {return 2;}
                 }
             }
         }
-        sudoku.afficher();
         return 0;
     }
 
@@ -110,5 +109,12 @@ public class DR2 extends DeductionRule{
             }
         }
         return false;
+    }
+
+    public boolean full(int[] Grille){
+        for (int i : Grille) {
+            if (i<1){return false;}
+        }
+        return true;
     }
 }

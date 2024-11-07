@@ -45,11 +45,16 @@ public class Choix {
     }
 
     public int[] cube(int[] grille, int x){
-        int debcube = (Math.round((float) x /27))*27+(x%9)-(x%3);   // Cela nous donne le premier élément du carré contenant notre élément du sudoku puisque ce sont des multiples de 3 sur une ligne d'un multiple de 27 (ex: (19%27)+(18%9)%3 donc son cube commence à l'élément 0)
-        int[] cube = new int[9];        // (x%9) retiens le décalage horizontal de x et -x%3 l'aligne sur le coin le plus proche puisque le coin est multiple de 3
+        int debcube = (x / 27) * 27 + (x % 9) - (x % 3);
+        int[] cube = new int[9];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                cube[i*3+j] = grille[debcube+j+i*9];
+                int index = debcube + j + i * 9;
+                if (index < grille.length) {
+                    cube[i * 3 + j] = grille[index];
+                } else {
+                    throw new IndexOutOfBoundsException("Index " + index + " out of bounds for length " + grille.length);
+                }
             }
         }
         return tri(cube);

@@ -2,12 +2,12 @@ package sudokusolver.DeductionRules;
 
 import sudokusolver.Solver.GridSingleton;
 
-public class DR1 extends DeductionRule {
+public class DR1 extends DeductionRule implements DeductionRuleStrategy  {
     public DR1() {
         super();
     }
 
-    public int rule(Grille sudoku){ // si une case n'a qu'un seul choix possible, alors on lui affecte ce choix et on relance la boucle
+    public int rule(GridSingleton sudoku){ // si une case n'a qu'un seul choix possible, alors on lui affecte ce choix et on relance la boucle
         int i = 0; //indice qui parcours la grille
         int element=0;
         while (i<81) {
@@ -19,7 +19,9 @@ public class DR1 extends DeductionRule {
         i++;
         }
 
-        if (full(Grille.grid)) {return 1; }
+        if (full(GridSingleton.grid)) {
+            return 1;
+        }
         return 0;
     }
 }
