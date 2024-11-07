@@ -15,7 +15,7 @@ public final class GridSingleton {
     public Choix[] choix = new Choix[81];
 
     private GridSingleton() throws FileNotFoundException {
-        GridSingleton.grid = Parser.parser("sudokusolver/GridFiles/test2.txt");
+        GridSingleton.grid = Parser.parser("sudokusolver/GridFiles/test0.txt");
         for (int i = 0; i < grid.length; i++) {
             this.choix[i] = new Choix(grid, i);
         }

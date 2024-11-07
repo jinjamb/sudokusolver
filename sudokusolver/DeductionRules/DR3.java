@@ -15,9 +15,9 @@ public class DR3 extends DeductionRule {
         return false;
     }
 
-    public int nblibre(int[] zone, Grille sudoku){
+    public int nblibre(int[] zone, GridSingleton sudoku){
         int compteur=0;
-        for (int i : zone) { if (Grille.grid[i]<1){ compteur++; }}
+        for (int i : zone) { if (GridSingleton.grid[i]<1){ compteur++; }}
         return compteur;
     }
 
@@ -43,11 +43,12 @@ public class DR3 extends DeductionRule {
         return 0;
     }
     
-    public void rule(GridSingleton sudoku){
+    public int rule(GridSingleton sudoku){
         for (int i = 0; i < 9; i++) {
             parcours(ligne(i*9), sudoku);
             parcours(colomne(i), sudoku);
             parcours(cube((i*3/9)*27+(i*3)), sudoku);
         }
+        return 0;
     }
 }
