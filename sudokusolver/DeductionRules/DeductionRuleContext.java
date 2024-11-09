@@ -1,6 +1,6 @@
 package sudokusolver.DeductionRules;
 
-import sudokusolver.Solver.GridSingleton;
+import sudokusolver.Solver.Grid;
 
 public class DeductionRuleContext {
     private DeductionRuleStrategy strategy;
@@ -9,10 +9,10 @@ public class DeductionRuleContext {
         this.strategy = strategy;
     }
 
-    public void processRule(GridSingleton sudoku) {
+    public int processRule(Grid sudoku) {
         if (strategy == null) {
             throw new IllegalStateException("Strategy not set");
         }
-        strategy.rule(sudoku);
+        return strategy.rule(sudoku);
     }
 }

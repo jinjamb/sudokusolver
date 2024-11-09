@@ -1,7 +1,7 @@
 package sudokusolver.DeductionRules;
 
-import sudokusolver.Solver.GridSingleton;
+import sudokusolver.Solver.Grid;
 
 public interface DeductionRuleStrategy {
-    int rule(GridSingleton grille);
+    int rule(Grid grille);
 }

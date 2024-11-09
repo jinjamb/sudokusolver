@@ -1,31 +1,9 @@
 package sudokusolver.DeductionRules;
 
-import sudokusolver.Solver.GridSingleton;
-
 public abstract class DeductionRule {
+    Notify notify=new Notify();
 
     public DeductionRule(){}
-    public int rule(GridSingleton grille){
-        return 0;
-    }
-   
-    public void printarray(int[] A){ // a bouger dans une toolbox
-        System.out.print("[");
-        for (int i = 0; i < A.length; i++) {
-            if (A[i]==-1) {System.out.print("_");}
-            if (A[i]==0){System.out.print(" ");}
-            else if (A[i]!=-1) {System.out.print(A[i]);}
-            if (i< A.length-1){System.out.print(", ");}
-            }
-            System.out.print("]\n");
-    }
-    
-    public boolean full(int[] Grille){
-        for (int i : Grille) {
-            if (i<1){return false;}
-        }
-        return true;
-    }
 
     public int[] colomne(int x){
         int debcol = x%9; //Cela nous donne le premier élément de la "colomne" du sudoku puisque ce sont des multiples de 9 (ex: 19%9=1 donc sa colomne commence à l'élément 1)
@@ -40,8 +18,8 @@ public abstract class DeductionRule {
         return ligne;
     }
     public int[] cube(int x){
-        int debcube = (Math.round(x/27))*27+(x%9)-(x%3);   // Cela nous donne le premier élément du carré contenant notre élément du sudoku puisque ce sont des multiples de 3 sur une ligne d'un multiple de 27 (ex: (19%27)+(18%9)%3 donc son cube commence à l'élément 0)
-        int[] cube = new int[9];        // (x%9) retiens le décalage horizontal de x et -x%3 l'aligne sur le coin le plus proche puisque le coin est multiple de 3
+        int debcube = (x/27)*27+(x%9)-(x%3);   // Cela nous donne le premier élément du carré contenant notre élément du sudoku puisque ce sont des multiples de 3 sur une ligne d'un multiple de 27 (ex: (19%27)+(18%9)%3 donc son cube commence à l'élément 0)
+        int[] cube = new int[9];               // (x%9) retiens le décalage horizontal de x et -x%3 l'aligne sur le coin supérieur gauche de "cube" le plus proche
         for (int i = 0; i < 3; i++) { for (int j = 0; j < 3; j++) {
             cube[i*3+j] = debcube+j+i*9; }}
         return cube;

@@ -1,6 +1,6 @@
 package sudokusolver.DeductionRules;
 
-import sudokusolver.Solver.GridSingleton;
+import sudokusolver.Solver.Grid;
 
 public class DR2 extends DeductionRule implements DeductionRuleStrategy{
 
@@ -8,35 +8,37 @@ public class DR2 extends DeductionRule implements DeductionRuleStrategy{
         super();
     }
 
-    public int rule(GridSingleton sudoku) {
+    public int rule(Grid sudoku) {
+        int agis=0;
         for (int num = 1; num <= 9; num++) {
             for (int i = 0; i < 81; i++) {
-                if (GridSingleton.grid[i] == -1) {
+                if (sudoku.grid[i] == -1) {
                     int rowIndex = findUniqueInRow(sudoku, i, num);
                     int colIndex = findUniqueInCol(sudoku, i, num);
                     int subgridIndex = findUniqueInBox(sudoku, i, num);
-
                     if (rowIndex != -1) {
-                        sudoku.set(num, rowIndex);
+                        sudoku.set(num, rowIndex); agis=1;
+                        this.notify.modif(num,i);
                     } else if (colIndex != -1) {
-                        sudoku.set(num, colIndex);
+                        sudoku.set(num, colIndex); agis=1;
+                        this.notify.modif(num,i);
                     } else if (subgridIndex != -1) {
-                        sudoku.set(num, subgridIndex);
+                        sudoku.set(num, subgridIndex); agis=1;
+                        this.notify.modif(num,i);
                     }
-                    if (full(GridSingleton.grid)) {return 2;}
                 }
             }
         }
-        return 0;
+        return agis;
     }
 
-    private int findUniqueInRow(GridSingleton sudoku, int index, int num) {
+    private int findUniqueInRow(Grid sudoku, int index, int num) {
         int stRow = index - (index % 9);
         int count = 0;
         int uniqueIndex = -1;
 
         for (int i = stRow; i < stRow + 9; i++) {
-            if (GridSingleton.grid[i] == -1 && canPlaceNumber(sudoku, i, num)) {
+            if (sudoku.grid[i] == -1 && canPlaceNumber(sudoku, i, num)) {
                 count++;
                 uniqueIndex = i;
             }
@@ -44,13 +46,13 @@ public class DR2 extends DeductionRule implements DeductionRuleStrategy{
         return count == 1 ? uniqueIndex : -1;
     }
 
-    private int findUniqueInCol(GridSingleton sudoku, int index, int num) {
+    private int findUniqueInCol(Grid sudoku, int index, int num) {
         int stCol = index % 9;
         int count = 0;
         int uniqueIndex = -1;
 
         for (int i = stCol; i < 81; i += 9) {
-            if (GridSingleton.grid[i] == -1 && canPlaceNumber(sudoku, i, num)) {
+            if (sudoku.grid[i] == -1 && canPlaceNumber(sudoku, i, num)) {
                 count++;
                 uniqueIndex = i;
             }
@@ -58,7 +60,7 @@ public class DR2 extends DeductionRule implements DeductionRuleStrategy{
         return count == 1 ? uniqueIndex : -1;
     }
 
-    private int findUniqueInBox(GridSingleton sudoku, int index, int num) {
+    private int findUniqueInBox(Grid sudoku, int index, int num) {
         int stBox = (index / 27) * 27 + (index % 9) - (index % 3);
         int count = 0;
         int uniqueIndex = -1;
@@ -66,7 +68,7 @@ public class DR2 extends DeductionRule implements DeductionRuleStrategy{
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 int currentIndex = stBox + j + i * 9;
-                if (GridSingleton.grid[currentIndex] == -1 && canPlaceNumber(sudoku, currentIndex, num)) {
+                if (sudoku.grid[currentIndex] == -1 && canPlaceNumber(sudoku, currentIndex, num)) {
                     count++;
                     uniqueIndex = currentIndex;
                 }
@@ -75,46 +77,39 @@ public class DR2 extends DeductionRule implements DeductionRuleStrategy{
         return count == 1 ? uniqueIndex : -1;
     }
 
-    private boolean canPlaceNumber(GridSingleton sudoku, int index, int num) {
+    private boolean canPlaceNumber(Grid sudoku, int index, int num) {
         return !isInRow(sudoku, index, num) && !isInCol(sudoku, index, num) && !isInBox(sudoku, index, num);
     }
 
-    private boolean isInRow(GridSingleton sudoku, int index, int num) {
+    private boolean isInRow(Grid sudoku, int index, int num) {
         int stRow = index - (index % 9);
         for (int i = stRow; i < stRow + 9; i++) {
-            if (GridSingleton.grid[i] == num) {
+            if (sudoku.grid[i] == num) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean isInCol(GridSingleton sudoku, int index, int num) {
+    private boolean isInCol(Grid sudoku, int index, int num) {
         int stCol = index % 9;
         for (int i = stCol; i < 81; i += 9) {
-            if (GridSingleton.grid[i] == num) {
+            if (sudoku.grid[i] == num) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean isInBox(GridSingleton sudoku, int index, int num) {
+    private boolean isInBox(Grid sudoku, int index, int num) {
         int stBox = (index / 27) * 27 + (index % 9) - (index % 3);
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if (GridSingleton.grid[stBox + j + i * 9] == num) {
+                if (sudoku.grid[stBox + j + i * 9] == num) {
                     return true;
                 }
             }
         }
         return false;
-    }
-
-    public boolean full(int[] Grille){
-        for (int i : Grille) {
-            if (i<1){return false;}
-        }
-        return true;
     }
 }
