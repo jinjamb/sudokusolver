@@ -8,7 +8,8 @@ import java.io.FileNotFoundException;
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         DeductionRuleContext drContext = new DeductionRuleContext();
-        Grid sudoku = Grid.getInstance("sudokusolver/GridFiles/test.txt");
+        String filePath = args[0];
+        Grid sudoku = Grid.getInstance(filePath);
         Editeur editeur = new Editeur(sudoku);
         Notify notify =new Notify();
 
