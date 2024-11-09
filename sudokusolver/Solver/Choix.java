@@ -1,10 +1,8 @@
 package sudokusolver.Solver;
 
-import sudokusolver.DeductionRules.*;
-
 public class Choix {
-    public int[] liste;
-    public int nb_choix=0;
+    private int[] liste;
+    private int nb_choix=0;
 
     Choix(int[] grille, int x){ 
         this.liste=new int[]{0,0,0,0,0,0,0,0,0};
@@ -73,5 +71,12 @@ public class Choix {
             if (B[index]<1) { resultat[index]=B[index]; }
         }
         return resultat;
+    }
+
+    public int getNb_choix() {
+        return nb_choix;
+    }
+    public int[] getListe() {
+        return liste;
     }
 }

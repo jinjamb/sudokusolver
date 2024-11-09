@@ -11,9 +11,9 @@ public class DR1 extends DeductionRule implements DeductionRuleStrategy  {
         int i = 0; //indice qui parcours la grille
         int element=0;
         while (i<81) {
-            if (sudoku.choix[i].nb_choix==1 && sudoku.grid[i]<1 ) {// 8 est le dernier élément de la liste donc le seul différent de -1
-                while (sudoku.choix[i].liste[element]==0){element++;}
-                sudoku.set(sudoku.choix[i].liste[element], i);
+            if (sudoku.getChoix()[i].getNb_choix()==1 && sudoku.getGrid()[i]<1 ) {// 8 est le dernier élément de la liste donc le seul différent de -1
+                while (sudoku.getChoix()[i].getListe()[element]==0){element++;}
+                sudoku.set(sudoku.getChoix()[i].getListe()[element], i);
                 this.notify.modif(element+1,i); element=0;
                 i=0;
             continue;}

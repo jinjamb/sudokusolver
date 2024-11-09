@@ -12,7 +12,7 @@ public class DR2 extends DeductionRule implements DeductionRuleStrategy{
         int agis=0;
         for (int num = 1; num <= 9; num++) {
             for (int i = 0; i < 81; i++) {
-                if (sudoku.grid[i] == -1) {
+                if (sudoku.getGrid()[i] == -1) {
                     int rowIndex = findUniqueInRow(sudoku, i, num);
                     int colIndex = findUniqueInCol(sudoku, i, num);
                     int subgridIndex = findUniqueInBox(sudoku, i, num);
@@ -38,7 +38,7 @@ public class DR2 extends DeductionRule implements DeductionRuleStrategy{
         int uniqueIndex = -1;
 
         for (int i = stRow; i < stRow + 9; i++) {
-            if (sudoku.grid[i] == -1 && canPlaceNumber(sudoku, i, num)) {
+            if (sudoku.getGrid()[i] == -1 && canPlaceNumber(sudoku, i, num)) {
                 count++;
                 uniqueIndex = i;
             }
@@ -52,7 +52,7 @@ public class DR2 extends DeductionRule implements DeductionRuleStrategy{
         int uniqueIndex = -1;
 
         for (int i = stCol; i < 81; i += 9) {
-            if (sudoku.grid[i] == -1 && canPlaceNumber(sudoku, i, num)) {
+            if (sudoku.getGrid()[i] == -1 && canPlaceNumber(sudoku, i, num)) {
                 count++;
                 uniqueIndex = i;
             }
@@ -68,7 +68,7 @@ public class DR2 extends DeductionRule implements DeductionRuleStrategy{
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 int currentIndex = stBox + j + i * 9;
-                if (sudoku.grid[currentIndex] == -1 && canPlaceNumber(sudoku, currentIndex, num)) {
+                if (sudoku.getGrid()[currentIndex] == -1 && canPlaceNumber(sudoku, currentIndex, num)) {
                     count++;
                     uniqueIndex = currentIndex;
                 }
@@ -84,7 +84,7 @@ public class DR2 extends DeductionRule implements DeductionRuleStrategy{
     private boolean isInRow(Grid sudoku, int index, int num) {
         int stRow = index - (index % 9);
         for (int i = stRow; i < stRow + 9; i++) {
-            if (sudoku.grid[i] == num) {
+            if (sudoku.getGrid()[i] == num) {
                 return true;
             }
         }
@@ -94,7 +94,7 @@ public class DR2 extends DeductionRule implements DeductionRuleStrategy{
     private boolean isInCol(Grid sudoku, int index, int num) {
         int stCol = index % 9;
         for (int i = stCol; i < 81; i += 9) {
-            if (sudoku.grid[i] == num) {
+            if (sudoku.getGrid()[i] == num) {
                 return true;
             }
         }
@@ -105,7 +105,7 @@ public class DR2 extends DeductionRule implements DeductionRuleStrategy{
         int stBox = (index / 27) * 27 + (index % 9) - (index % 3);
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if (sudoku.grid[stBox + j + i * 9] == num) {
+                if (sudoku.getGrid()[stBox + j + i * 9] == num) {
                     return true;
                 }
             }

@@ -13,7 +13,7 @@ public class Main {
         Editeur editeur = new Editeur(sudoku);
         Notify notify =new Notify();
 
-        drContext.setStrategy(sudoku.dr1);
+        drContext.setStrategy(sudoku.getDr1());
         int status;
         while (true){
 
@@ -26,24 +26,24 @@ public class Main {
             status=drContext.processRule(sudoku);
             if(!sudoku.full()){
                 if (status!=0){ // si une DR marche, on retourne à la DR1
-                    drContext.setStrategy(sudoku.dr1);
+                    drContext.setStrategy(sudoku.getDr1());
                 }
                 else {
-                    if (sudoku.difficulte % 3 == 1) {
-                        drContext.setStrategy(sudoku.dr2); }
-                    else if (sudoku.difficulte % 3 == 2) { drContext.setStrategy(sudoku.dr3); }
+                    if (sudoku.getDifficulte() % 3 == 1) {
+                        drContext.setStrategy(sudoku.getDr2()); }
+                    else if (sudoku.getDifficulte() % 3 == 2) { drContext.setStrategy(sudoku.getDr3()); }
                     else {
-                        drContext.setStrategy(sudoku.dr1);
+                        drContext.setStrategy(sudoku.getDr1());
                         editeur.input();
                     }
-                    sudoku.difficulte++;
+                    sudoku.setDifficulte(sudoku.getDifficulte()+1);
                 }
             }
             else { break; }
         }
-        editeur.sc.close();
-
+        
+        editeur.closeSc();
         sudoku.afficher();
-        notify.fin(sudoku.difficulte);
+        notify.fin(sudoku.getDifficulte());
     }
 }

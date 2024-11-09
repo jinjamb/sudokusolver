@@ -9,12 +9,12 @@ import java.util.Arrays;
 
 public final class Grid {
     private static Grid INSTANCE;
-    public int[] grid = new int[81];
-    public DR1 dr1 = new DR1();
-    public DR2 dr2 = new DR2();
-    public DR3 dr3 = new DR3();
-    public Choix[] choix = new Choix[81];
-    public int difficulte=1;
+    private int[] grid = new int[81];
+    private final DR1 dr1 = new DR1();
+    private final DR2 dr2 = new DR2();
+    private final DR3 dr3 = new DR3();
+    private Choix[] choix = new Choix[81];
+    private int difficulte=1;
 
     private Grid(String filePath) throws FileNotFoundException {
         this.grid = Parser.parser(filePath);
@@ -30,6 +30,26 @@ public final class Grid {
         return INSTANCE;
     }
 
+    public Choix[] getChoix() {
+        return choix;
+    }
+
+    public DR1 getDr1() {return dr1; }
+    public DR2 getDr2() {return dr2; }
+    public DR3 getDr3() {return dr3; }
+
+    public int[] getGrid() {
+        return grid;
+    }
+
+    public int getDifficulte() {
+        return difficulte;
+    }
+
+    public void setDifficulte(int difficulte) {
+        this.difficulte = difficulte;
+    }
+
     public void set(int val, int indice){
         this.grid[indice]=val;
         for (int i : dr1.ligne(indice)) { this.choix[i].retirer(val); }
@@ -41,8 +61,8 @@ public final class Grid {
         if (indice!=-1) {
             for (int i = 0; i < choix.length; i++) {
                 if (choix[i]>0) {
-                    if (this.choix[indice].liste[i] > 0 ) {
-                        this.choix[indice].liste[choix[i]-1]=0;
+                    if (this.choix[indice].getListe()[i] > 0 ) {
+                        this.choix[indice].getListe()[choix[i]-1]=0;
                     }
                 }
             }
@@ -70,7 +90,7 @@ public final class Grid {
             if (this.grid[i]>9){
                 return true;
             }
-            if (Arrays.equals((this.choix[i].liste), new int[]{0,0,0,0,0,0,0,0,0}) && this.grid[i]<1 ){
+            if (Arrays.equals((this.choix[i].getListe()), new int[]{0,0,0,0,0,0,0,0,0}) && this.grid[i]<1 ){
                 return true;
             }
             if (this.grid[i]>=1){ // si grid[i] contient une valeur et qu'une autre contient aussi cette meme valeur, alors on a une erreur

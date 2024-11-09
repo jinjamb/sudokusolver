@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Editeur {
     Grid grid;
     Grid.Memento memento;
-    public Scanner sc = new Scanner(System.in);
+    private final Scanner sc = new Scanner(System.in);
 
     public Editeur(Grid grid) {
         this.grid=grid;
@@ -25,5 +25,7 @@ public class Editeur {
     public void reset(){
         this.grid.getOldGrid(this.memento);
     }
+
+    public void closeSc(){this.sc.close();}
 
 }
